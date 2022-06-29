@@ -51,3 +51,49 @@ const QuestionType = new GraphQLObjectType(
         })
     }
 )
+
+
+const QuizType = new GraphQLObjectType(
+    {
+        name: 'Quiz',
+        description: 'Quiz type',
+        fields: () => ({
+            id: { type: GraphQLID },
+            slug: { type: GraphQLString },
+            title: { type: GraphQLString },
+            description: { type: GraphQLString },
+            userId: { type: GraphQLString },
+            user: { 
+                type: UserType,
+                resolve(parent, args){
+                    return User.findById(parent.userId)
+                } 
+            },
+            questions: {
+                type: GraphQLList(QuestionType),
+                resolve(parent, args){
+                    return Question.find({ quizId: parent.id })
+                }
+            },
+            submissions: {
+                type: GraphQLList(SubmissionType),
+                resolve(parent, args){
+                    return Submission.find({ quizId: parent.id })
+                }
+            },
+            avgScore: {
+                type: GraphQLFloat,
+                async resolve(parent, arg){
+                    const submissions = await Submission.find({ quizId: parent.id });
+                    let score = 0;
+
+                    for (const sub of submissions){
+                        score += sub.score
+                    }
+
+                    return score / submissions.length
+                }
+            }
+        })
+    }
+)
