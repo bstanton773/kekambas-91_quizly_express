@@ -16,13 +16,13 @@ const UserType = new GraphQLObjectType(
             username: { type: GraphQLString },
             email: { type: GraphQLString },
             quizzes: {
-                type: GraphQLList(QuizType),
+                type: new GraphQLList(QuizType),
                 resolve(parent, args){
                     return Quiz.find({ userId: parent.id })
                 }
             },
             submissions: {
-                type: GraphQLList(SubmissionType),
+                type: new GraphQLList(SubmissionType),
                 resolve(parent, args){
                     return Submission.find({ userId: parent.id })
                 }
@@ -70,13 +70,13 @@ const QuizType = new GraphQLObjectType(
                 } 
             },
             questions: {
-                type: GraphQLList(QuestionType),
+                type: new GraphQLList(QuestionType),
                 resolve(parent, args){
                     return Question.find({ quizId: parent.id })
                 }
             },
             submissions: {
-                type: GraphQLList(SubmissionType),
+                type: new GraphQLList(SubmissionType),
                 resolve(parent, args){
                     return Submission.find({ quizId: parent.id })
                 }
