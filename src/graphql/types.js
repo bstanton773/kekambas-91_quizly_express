@@ -122,3 +122,28 @@ const SubmissionType = new GraphQLObjectType(
         })
     }
 )
+
+
+const QuestionInputType = new GraphQLInputObjectType(
+    {
+        name: 'QuestionInput',
+        description: 'Question Input Type',
+        fields: () => ({
+            title: { type: GraphQLString },
+            order: { type: GraphQLInt },
+            correctAnswer: { type: GraphQLString }
+        })
+    }
+)
+
+
+const AnswerInputType = new GraphQLInputObjectType(
+    {
+        name: 'AnswerInput',
+        description: 'Answer Input Type',
+        fields: () => ({
+            questionId: { type: GraphQLString },
+            answer: { type: GraphQLString }
+        })
+    }
+)
