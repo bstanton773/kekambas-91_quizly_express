@@ -30,3 +30,24 @@ const UserType = new GraphQLObjectType(
         })
     }
 )
+
+
+const QuestionType = new GraphQLObjectType(
+    {
+        name: 'Question',
+        description: 'Question type',
+        fields: () => ({
+            id: { type: GraphQLID },
+            title: { type: GraphQLString },
+            correctAnswer: { type: GraphQLString },
+            quizId: { type: GraphQLString },
+            order: { type: GraphQLInt },
+            quiz: {
+                type: QuizType,
+                resolve(parent, args){
+                    return User.findById(parent.quizId)
+                }
+            }
+        })
+    }
+)
