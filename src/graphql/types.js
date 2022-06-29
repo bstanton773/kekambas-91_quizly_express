@@ -147,3 +147,12 @@ const AnswerInputType = new GraphQLInputObjectType(
         })
     }
 )
+
+module.exports = {
+    UserType,
+    QuizType,
+    QuestionType,
+    SubmissionType,
+    QuestionInputType,
+    AnswerInputType
+}
