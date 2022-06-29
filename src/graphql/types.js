@@ -97,3 +97,28 @@ const QuizType = new GraphQLObjectType(
         })
     }
 )
+
+const SubmissionType = new GraphQLObjectType(
+    {
+        name: 'Submission',
+        description: 'Submission type',
+        fields: () => ({
+            id: { type: GraphQLID },
+            quizId: { type: GraphQLString },
+            userId: { type: GraphQLString },
+            score: { type: GraphQLInt },
+            user: {
+                type: UserType,
+                resolve(parent, args){
+                    return User.findById(parent.userId)
+                }
+            },
+            quiz: {
+                type: QuizType,
+                resolve(parent, args){
+                    return Quiz.findById(parent.quizId)
+                }
+            }
+        })
+    }
+)
