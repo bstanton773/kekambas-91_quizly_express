@@ -19,10 +19,28 @@ const register = {
         const user = new User({ username, email, password });
         user.save();
 
-        const token = 'abc123';
+        const token = 'hellothisisthetoken';
 
         return token;
     }
 }
 
-module.exports = { register };
+
+const login = {
+    type: GraphQLString,
+    args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+    },
+    async resolve(parent, args){
+        const user = await User.findOne({ email: args.email })
+        if (!user || args.password !== user.password){
+            throw new Error('Invalid Credentials')
+        }
+
+        const token = 'hellothisisthetoken';
+        return token;
+    }
+}
+
+module.exports = { register, login };
