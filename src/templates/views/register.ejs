@@ -1,68 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta name="Description" content="Enter your description here"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        <title>Quizly</title>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="/">Quizly</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="/">Home</a>
-                    <a class="nav-link" href="#">Submissions</a>
-                    <a class="nav-link" href="#">Logout</a>
-                </div>
-            </div>
-            </div>
-        </nav>
+<%- include('../partials/header.ejs') %>
 
-        <!-- Begin Container Here -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-3">
-                    <div class="card mt-5">
-                        <div class="card-body">
-                            <h1 class="mb-4">
-                                <form action="/auth/register" method="post">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="username">Username</label>
-                                        <input type="text" name="username" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="confirmPass">Confirm Password</label>
-                                        <input type="password" name="confirmPass" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <a href="/auth/login"><small>Already have an account? Login here.</small></a>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Register</button>
-                                </form>
-                            </h1>
-                        </div>
-                    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h1 class="mb-4">
+                        <form action="/auth/register" method="post">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPass">Confirm Password</label>
+                                <input type="password" name="confirmPass" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <a href="/auth/login"><small>Already have an account? Login here.</small></a>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </form>
+                    </h1>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
-    </body>
-</html>
+<%- include('../partials/footer.ejs') %>
