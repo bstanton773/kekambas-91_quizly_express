@@ -1,5 +1,7 @@
+const axios = require('axios');
+
+
 module.exports = async (req, res) => {
-    console.log(req.body);
     if (req.body.password !== req.body.confirmPass){
         res.send({ error: "Your passwords do not match "})
         return
@@ -8,6 +10,26 @@ module.exports = async (req, res) => {
     const mutation = `mutation register($email: String!, $username: String!, $password: String!) {
         register(email: $email, username: $username, password: $password)
     }`
-    
-    res.send('Registered!');
+    try {
+        const { data } = await axios.post('http://localhost:3000/graphql', 
+            {
+                query: mutation,
+                variables: {
+                    email: req.body.email,
+                    password: req.body.password,
+                    username: req.body.username
+                }
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+        console.log(data)
+        res.redirect('/');
+    } catch(e){
+        console.log(e)
+        res.redirect('/auth/register')
+    }
 }
