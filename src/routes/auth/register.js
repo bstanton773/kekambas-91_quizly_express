@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
         register(email: $email, username: $username, password: $password)
     }`
     try {
-        const { data } = await axios.post('http://localhost:3000/graphql', 
+        const { data } = await axios.post(process.env.GRAPHQL_ENDPOINT, 
             {
                 query: mutation,
                 variables: {
