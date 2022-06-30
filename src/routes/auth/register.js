@@ -26,7 +26,8 @@ module.exports = async (req, res) => {
                 }
             }
         )
-        console.log(data)
+        const token = data.data.register
+        res.cookie('jwtToken', token, { maxAge: 900000, httpOnly: true })
         res.redirect('/');
     } catch(e){
         console.log(e)
