@@ -1,6 +1,6 @@
 const { GraphQLString, GraphQLNonNull, GraphQLList } = require('graphql');
-const { QuestionInputType } = require('./types')
-const { User, Quiz, Question } = require('../models');
+const { QuestionInputType, AnswerInputType } = require('./types')
+const { User, Quiz, Question, Submission } = require('../models');
 
 
 const register = {
@@ -101,4 +101,49 @@ const createQuiz = {
     }
 }
 
-module.exports = { register, login, createQuiz };
+
+const submitQuiz = {
+    type: GraphQLString,
+    args: {
+        answers: {
+            type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(AnswerInputType)))
+        },
+        userId: {
+            type: GraphQLString
+        },
+        quizId: {
+            type: GraphQLString
+        }
+    },
+    async resolve(parent, args){
+        try{
+            let correct = 0;
+            let totalPossibleScore = args.answers.length;
+
+            for (const answer of args.answers){
+                const questionAnswer = await Question.findById(answer.questionId)
+                if (answer.answer.trim().toLowerCase() === questionAnswer.correctAnswer.trim().toLowerCase()){
+                    correct++
+                }
+            }
+
+            const finalScore = (correct / totalPossibleScore) * 100
+
+            const submission = new Submission({
+                userId: args.userId,
+                quizId: args.quizId,
+                score: finalScore
+            })
+
+            submission.save()
+
+            return submission.id
+        } catch(e){
+            console.log(e);
+            return ''
+        }
+    }
+}
+
+
+module.exports = { register, login, createQuiz, submitQuiz };
