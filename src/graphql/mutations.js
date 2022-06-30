@@ -1,6 +1,7 @@
 const { GraphQLString, GraphQLNonNull, GraphQLList } = require('graphql');
 const { QuestionInputType, AnswerInputType } = require('./types')
 const { User, Quiz, Question, Submission } = require('../models');
+const { createToken } = require('../utils/auth')
 
 
 const register = {
@@ -20,7 +21,7 @@ const register = {
         const user = new User({ username, email, password });
         user.save();
 
-        const token = 'hellothisisthetoken';
+        const token = createToken(user);
 
         return token;
     }
@@ -39,7 +40,7 @@ const login = {
             throw new Error('Invalid Credentials')
         }
 
-        const token = 'hellothisisthetoken';
+        const token = createToken(user);
         return token;
     }
 }
