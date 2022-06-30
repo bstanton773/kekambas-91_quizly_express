@@ -25,6 +25,9 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
+// Initialize routes
+require('./src/routes')(app)
+
 
 app.get('/test', (req, res) => {
     res.render('test')
