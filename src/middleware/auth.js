@@ -13,10 +13,8 @@ const authenticate = async (req, res, next) => {
     try{
         const verified = jwt.verify(token, process.env.JWT_SECRET)
         req.verifiedUser = verified
-        console.log("User verification succesful", verified)
         next()
     } catch(err) {
-        console.log('User verification failed')
 
         if (unprotectedRoutes.includes(req.path)){
             next()

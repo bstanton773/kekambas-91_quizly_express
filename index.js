@@ -6,6 +6,7 @@ const { connectDB } = require('./src/db');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./src/graphql/schema')
 const { authenticate } = require('./src/middleware/auth');
+const { userData } = require('./src/middleware/userData')
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ connectDB();
 app.use(cookieParser());
 
 app.use(authenticate);
+app.use(userData);
 
 app.use('/graphql', graphqlHTTP({
     schema,
