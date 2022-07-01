@@ -12,4 +12,9 @@ QuizDashboardRouter.route('/success/:slug')
 QuizDashboardRouter.route('/:slug')
     .get(require('./view.js'))
 
+
+QuizDashboardRouter.route('/:slug/submit')
+    .post(require('./submit.js'))
+
+
 module.exports = QuizDashboardRouter
