@@ -44,6 +44,5 @@ module.exports = async (req, res) => {
         console.log(e)
     }
 
-    // res.redirect(`/quiz/results/${submissionId}`)
-    res.redirect('/')
+    res.redirect(`/quiz/results/${submissionId}`)
 }
