@@ -7,7 +7,6 @@ const userData = async (req, res, next) => {
         return
     }
 
-    console.log(req.verifiedUser.user._id)
     let data;
 
     try{
