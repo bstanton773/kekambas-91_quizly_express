@@ -50,5 +50,5 @@ module.exports = async (req, res) => {
         console.log(e)
     }   
 
-    res.redirect(`/`)
+    res.redirect(`/quiz/success/${quizSlug}`)
 }

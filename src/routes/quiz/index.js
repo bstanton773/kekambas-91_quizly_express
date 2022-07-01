@@ -5,6 +5,10 @@ QuizDashboardRouter.route('/create')
     .post(require('./create.js'))
 
 
+QuizDashboardRouter.route('/success/:slug')
+    .get(require('./created.js'))
+
+
 QuizDashboardRouter.route('/:slug')
     .get(require('./view.js'))
 
