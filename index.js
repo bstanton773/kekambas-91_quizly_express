@@ -26,9 +26,6 @@ app.set('views', path.join(__dirname, '/src/templates/views'))
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-});
 
 // Initialize routes
 require('./src/routes')(app)
